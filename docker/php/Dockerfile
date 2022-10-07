@@ -39,6 +39,7 @@ COPY ./src /var/www/html
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 RUN composer install -q -n --no-ansi --no-dev --no-scripts --no-progress --prefer-dist \
+  && composer dump-autoload \
   && chown -R www-data:www-data ./ \
   && chmod -R 777 storage bootstrap/cache \
   && php artisan optimize:clear \
